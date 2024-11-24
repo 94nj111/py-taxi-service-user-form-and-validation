@@ -95,7 +95,7 @@ class DriverDetailView(LoginRequiredMixin, generic.DetailView):
 class DriverCreateView(LoginRequiredMixin, generic.CreateView):
     model = Driver
     form_class = DriverCreationForm
-    success_url = "taxi:driver-list"
+    success_url = reverse_lazy("taxi:driver-list")
 
     def form_valid(self, form):
         user = form.save()
@@ -116,10 +116,10 @@ class DriverUpdateView(LoginRequiredMixin, generic.UpdateView):
 
 class DriverToggleView(LoginRequiredMixin, generic.View):
     @staticmethod
-    def post(requset, pk):
+    def post(request, pk):
         car = get_object_or_404(Car, pk=pk)
-        if car.drivers.filter(id=requset.user.id).exists():
-            car.drivers.remove(requset.user)
+        if car.drivers.filter(id=request.user.id).exists():
+            car.drivers.remove(request.user)
         else:
-            car.drivers.add(requset.user)
+            car.drivers.add(request.user)
         return redirect("taxi:car-detail", pk=pk)
