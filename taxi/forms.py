@@ -14,7 +14,7 @@ class DriverCreationForm(UserCreationForm):
         validators=[
             RegexValidator(
                 regex=REGEX,
-                message="Enter a valid value: the appropriate format is 'AAA00000'",
+                message="The appropriate format is 'AAA00000'",
             ),
         ],
     )
@@ -36,7 +36,7 @@ class DriverLicenseUpdateForm(forms.ModelForm):
         validators=[
             RegexValidator(
                 regex=REGEX,
-                message="Enter a valid value: the appropriate format is 'AAA00000'",
+                message="The appropriate format is 'AAA00000'",
             ),
         ],
     )
